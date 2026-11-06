@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+cd "${ARMS_DIR:-$HOME/ARMS}"
+
+DDS_WRAPPER="${DDS_WRAPPER:-/home/unitree/cyclonedds_py_0_10_fix/run_with_fixed_dds.sh}"
+NETWORK_INTERFACE="${NETWORK_INTERFACE:-eth0}"
+SNAPSHOT_FILE="${SNAPSHOT_FILE:-before_detect_and_reach.json}"
+RESTORE_DURATION="${RESTORE_DURATION:-5.0}"
+LOG_FILE="${LOG_FILE:-restore_right_arm_home_fixed_dds.log}"
+
+echo "ARMS_DIR=$(pwd)"
+echo "SNAPSHOT_FILE=$SNAPSHOT_FILE"
+echo "RESTORE_DURATION=$RESTORE_DURATION"
+echo "LOG_FILE=$LOG_FILE"
+echo "DDS_ENV=isolated"
+
+exec env -i \
+  HOME="$HOME" \
+  USER="${USER:-unitree}" \
+  LOGNAME="${LOGNAME:-${USER:-unitree}}" \
+  PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin" \
+  ARMS_DIR="$(pwd)" \
+  "$DDS_WRAPPER" python3 -B -m arms.move_arm_preset \
+  --hand right \
+  --network-interface "$NETWORK_INTERFACE" \
+  --restore-only \
+  --duration "$RESTORE_DURATION" \
+  --snapshot-file "$SNAPSHOT_FILE" \
+  --log-file "$LOG_FILE"

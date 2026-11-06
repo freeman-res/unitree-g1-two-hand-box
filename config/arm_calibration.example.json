@@ -1,0 +1,20 @@
+﻿{
+  "right": [
+    {
+      "name": "right_safe_front_mid_example_replace_me",
+      "x_m": 0.35,
+      "y_m": -0.18,
+      "z_m": 0.75,
+      "joints": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    }
+  ],
+  "left": [
+    {
+      "name": "left_safe_front_mid_example_replace_me",
+      "x_m": 0.35,
+      "y_m": 0.18,
+      "z_m": 0.75,
+      "joints": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    }
+  ]
+}
